@@ -1,0 +1,18 @@
+{
+	"status": 1,
+	"message": "",
+	"result": {
+		"list": [
+			{
+				"address": "西安市长安区西安邮电大学",
+				"tel": "15091671311",
+				"default": true	
+			},
+			{
+				"address": "商洛市商州区商洛中学",
+				"tel": "13992459214",
+				"default": false	
+			}
+		]
+	}
+}

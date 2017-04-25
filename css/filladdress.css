@@ -1,0 +1,113 @@
+.addressmess{
+	margin-bottom: 100px;
+}
+
+.address-item{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: flex-start;
+	padding: 0 20px;
+	height: 100px;
+	width:28%;
+}
+
+.default{
+	border: #f9a1bc solid 1px;
+	box-shadow: 0 0 10px #f9a1bc;
+}
+
+.word{
+	color: #f9a1bc;
+}
+
+.default-btn{
+	margin-left: 70%;
+	font-size: 0.8rem;
+}
+
+.default-btn span{
+	padding: 5px;
+}
+
+.insertaddr{
+	padding: 10px;
+	cursor: pointer;
+}
+
+.fill div{
+	margin: 5px;
+	font-size:0.8rem;
+}
+
+.fill div input{
+	height: 30px;
+	border-radius: 5px;
+	width:80%;
+}
+
+.dialog-plus{
+	height: 40%;
+}
+
+.submit{
+	margin-top:0px;
+}
+
+.content-plus{
+	padding:30px 10px;
+}
+
+.payment{
+	width:20%;
+	margin-left: 70%;
+	height:30px;
+	padding: 11px;
+	background-color: #f9a1bc;
+	text-align: center;
+	color: #fff;
+	cursor: pointer;
+}
+
+.success{
+	position: relative;
+	top:60px;
+	width:100%;
+}
+
+.success div{
+	margin-left:50%;
+	transform: translateX(-50%);
+}
+
+.success div img{
+	margin-left:50%;
+	transform: translateX(-50%);
+}
+
+.lookorder{
+	margin-left:50%;
+	transform: translateX(-50%);
+	width:25%;
+	height:30px;
+	padding: 11px;
+	background-color: #f9a1bc;
+	text-align: center;
+	color: #fff;
+	cursor: pointer;
+	margin-top:60px;
+}
+
+@media (max-width: 678px){
+	.address-item{
+		width: 100%;
+	}
+
+	.fill div input{
+		height: 30px;
+		border-radius: 5px;
+		width:80%;
+	}
+
+
+}

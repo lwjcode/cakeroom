@@ -1,0 +1,32 @@
+{
+	"status": 1,
+	"message": "",
+	"result": {
+		"list": [
+			{
+				"userId": "001",
+				"userName": "小静",
+				"userPass": "123456",
+				"userPic": "../images/user1.jpg"
+			},
+			{
+				"userId": "002",
+				"userName": "小婷",
+				"userPass": "123456",
+				"userPic": "../images/user4.jpg"
+			},
+			{
+				"userId": "003",
+				"userName": "小倩",
+				"userPass": "123456",
+				"userPic": "../images/user3.jpg"
+			},
+			{
+				"userId": "004",
+				"userName": "小娜",
+				"userPass": "123456",
+				"userPic": "../images/user2.jpg"
+			}
+		]
+	}
+}

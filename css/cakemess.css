@@ -1,0 +1,115 @@
+
+.cakemess{
+	margin-bottom: 100px;
+}
+.cakeimg-list{
+	position: relative;
+	top:50px;
+	width:100%;
+	height: 250px;
+}
+
+#slid-1, #slid-2, #slid-3{
+	width: 100%;
+	height: 100%;
+}
+
+#slid-1 img, #slid-2 img, #slid-3 img{
+	width: 100%;
+	height: 100%;
+}  
+
+.slid{
+	position: absolute;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	z-index: 2;
+	top: 200px;
+	left:50%;
+	transform: translateX(-50%);
+}
+
+.slid a span{
+	display: block;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	border: #ccc 1px solid;
+	margin: 5px;
+}
+
+.slid a span:hover{
+	background-color: #ccc;
+}
+
+.cake-mess{
+	position: relative;
+	width: 95%;
+	margin-top: 50px;
+	padding: 2.5%;
+	box-shadow: 0 0 10px #ccc;
+}
+
+.cake-mess span{
+	display: block;
+	width: 100%;
+	line-height: 30px;
+	font-size: 0.8rem;
+}
+
+.buy-quantity{
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+	width: 95%;
+	margin: 2.5%;
+	font-size: 1.2rem;
+}
+
+.quantity, .price{
+	color: #f9a1bc;
+}
+
+.tag-style{
+	display: flex;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+}
+
+.tag{
+	display: block;
+	width: 25px;
+	height: 25px;
+	background-color: #ccc;
+	margin: 0 10px;
+	text-align: center;
+	box-shadow: 0 0 5px #bbb;
+	cursor: pointer;
+}
+
+.buy-it{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	color: #fff;
+	width: 100%;
+}
+
+.cart-btn, .buy-btn{
+	background-color: #f9a1bc;
+	width: 23%;
+	margin: 10px;
+	padding: 10px;
+	text-align: center;
+	cursor: pointer;
+}
+
+@media (min-width: 920px){
+	.cakeimg-list{
+		width:100%;
+		height: 350px;
+	}
+}
+

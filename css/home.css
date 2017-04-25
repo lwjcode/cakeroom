@@ -1,0 +1,118 @@
+html, body{
+	margin: 0;
+	padding: 0;
+	font-size: 16px;
+	color: #354649;
+}
+
+.home{
+	margin-bottom: 100px;
+}
+
+header{
+	width:100%;
+	text-align: center;
+	background-color: #f9a1bc;
+	height:50px;
+	padding-top: 9px;
+	color: #fff;
+	font-size: 2rem;
+	position: fixed;
+	z-index: 2;
+}
+
+.warp{
+	top: 60px;
+	position: relative;
+}
+
+.list{
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.item{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	background-color: #fff;
+	box-shadow: 0 0 10px #ccc;
+	margin:10px;
+	align-items: center;
+	width:31%;
+	height:150px;
+	cursor: pointer;
+}
+
+.cakeimg{
+	width: 40%;
+	height:80%;
+	text-align: center;
+	padding: 20px;
+}
+
+.cakeimg img{
+	width: 80%;
+	height: 100%;
+}
+
+.cakename{
+	width: 35%;
+	height:80px;
+	padding-top: 32px;
+}
+
+.cakeprice{
+	width: 25%;
+	height:80px;
+	padding-top: 32px;
+	color: #f9a1bc;
+}
+
+.choice-box{
+	display: flex;
+	justify-content: space-around;
+	flex-direction: row;
+	width: 100%;
+	position: fixed;
+	top:92%;
+	z-index: 2px;
+	height: 50px;
+	align-items: center;
+	background-color: #fff;
+	box-shadow: 5px 0 5px #ccc;
+}
+
+.home-btn, .user-btn, .talk-btn{
+	font-size: 0.9rem;
+	cursor: pointer;
+	padding: 5px;
+}
+
+@media (max-width: 678px){
+	.item{
+		width: 100%;
+		height: 130px;
+	}
+
+	.cakeimg{
+		width: 35%;
+		height:70%;
+	}
+
+	.cakename{
+		width: 40%;
+	}
+
+	.cakeprice{
+		width: 25%;
+	}
+
+}
+

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>小静蛋糕屋</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="../css/home.css">
+	<link rel="stylesheet" type="text/css" href="../css/cakemess.css">
+	<link rel="stylesheet" type="text/css" href="../css/ordermess.css">
+	<link rel="stylesheet" type="text/css" href="../css/filladdress.css">
+	<link rel="stylesheet" type="text/css" href="../css/usercenter.css">
+</head>
+<body>
+
+<div id="container">
+<!--首页-->
+<article class="home"  v-if="currentPage === 1">
+	<header>
+		<div class="title">小静蛋糕屋</div>
+	</header>
+	<div class="warp">
+		<ul class="list">
+			<li class="item" v-for="item in cakelist" v-bind:id="item.cakeId" 
+			@click="buyit(item.cakeId)">
+				<div class="cakeimg">
+					<img v-bind:src="item.cakeImg1"/>
+				</div>
+				<div class="cakename">{{item.cakeName}}</div>
+				<div class="cakeprice">{{item.cakePrice | moneyFormat('￥', '元')}}</div>
+			</li>
+		</ul>
+	</div>
+</article>
+
+<!--蛋糕详情页-->
+<article v-if="currentPage === 2" class="cakemess">
+	<header>
+		<div class="title">蛋糕详情</div>
+	</header>
+	<div class="cakeimg-list">
+		<div id="slid-1" v-if="imgFlag === 1"><img v-bind:src="cakemess.cakeImg1"/></div>
+		<div id="slid-2" v-if="imgFlag === 2"><img v-bind:src="cakemess.cakeImg2"/></div>
+		<div id="slid-3" v-if="imgFlag === 3"><img v-bind:src="cakemess.cakeImg3"/></div>
+		<div class="slid">
+			<a href="#slid-1" @click="imgFlag=1"><span></span></a>
+			<a href="#slid-2" @click="imgFlag=2"><span></span></a>
+			<a href="#slid-3" @click="imgFlag=3"><span></span></a>
+		</div>
+	</div>
+	<div class="cake-mess">
+		<span>名称：{{cakemess.cakeName}}</span>
+		<span>单价：{{cakemess.cakePrice | moneyFormat('￥', '元')}}</span>
+		<span>描述：{{cakemess.cakeMess}}</span>
+	</div>
+	<div class="buy-quantity">
+		<div class="quantity">购买数量</div>
+		<div class="tag-style">
+			<span class="tag" @click="cakemess.cakeQuantity++">+</span>
+			<span class="price">{{cakemess.cakeQuantity}}</span>
+			<span class="tag" @click="cakemess.cakeQuantity > 1 ? cakemess.cakeQuantity-- : 1">-</span>
+		</div>
+	</div>
+	<footer class="buy-it">
+		<div class="cart-btn" @click="incart">加入购物车</div>
+		<div class="buy-btn" @click="filladdress(1)">购买</div>
+	</footer>
+</article>
+
+<!--个人中心页-->
+<article class="usermess" v-if="currentPage === 3">
+	<header>
+		<div class="title">个人中心</div>
+	</header>
+	<div class="usercenter">
+		<div class="user">
+			<div class="userimg"><img v-bind:src="user.userPic"/></div>
+			<div class="username"><span>{{user.userName}}</span></div>
+		</div>
+		<div class="order" @click="allorder(1)">我的订单</div>
+		<div class="cart" @click="allorder(0)">我的购物车</div>
+	</div>
+</article>
+
+<!--订单页和购物车页-->
+<article class="ordermess" v-if="currentPage === 4">
+	<header v-if="flag==1">
+		<div class="title">我的订单</div>
+	</header>
+	<header v-if="flag==0">
+		<div class="title">我的购物车</div>
+	</header>
+	<div class="warp">
+		<ul class="list">
+			<li class="item" v-for="item in userCake" @click="buyit(item.cakeId)">
+				<div class="orderimg">
+					<span class="choicebar" :class="{check: item.checked}" @click.stop="checkit(item)"></span>
+					<img v-bind:src="item.cakeImg1" class="img" />
+				</div>
+				<div class="order-mess">
+					<div class="cake-order-mess">
+						<div class="cake-name">{{item.cakeName}}</div>
+						<div class="cake-price">{{item.cakePrice | 
+						moneyFormat('￥', '元')}}
+						</div>
+					</div>
+					<div class="ordertime">{{item.orderTime}}</div>
+				</div>
+			</li>
+		</ul>
+		<div class="checkall">
+			<div class="alltext">全选</div>
+			<div class="allbtn" :class="{check: checked}" @click="checkall"></div>
+			<div class="delit" @click="delit">删除</div>
+		</div>
+	</div>
+	<div class="dialog" v-if="delitem">
+		<div class="header">
+			<div>弹出框</div>
+			<div class="quit" @click="delitem=false">X</div>
+		</div>
+		<div class="content">你确定要删除吗？</div>
+		<div class="choice">
+			<div class="issure" @click="sure">确定</div>
+			<div class="issure" @click="delitem=false">取消</div>
+		</div>
+	</div>
+	<div class="shadow" v-if="delitem"></div>		
+</article>
+
+<!--地址选配-->
+<article class="addressmess" v-if="currentPage === 6">
+	<header>
+		<div class="title">配送地址</div>
+	</header>
+	<div class="warp">
+		<ul class="list">
+			<li class="item address-item" v-for="(item, index) in addresslist" 
+			:class="{default: index==currentindex}">
+				<div>地址：<span>{{item.address}}</span></div>
+				<div>电话：<span>{{item.tel}}</span></div>
+				<div class="default-btn">
+					<span :class="{word: index==currentindex}" v-if="index==currentindex">默认</span>
+					<span :class="{word: index==currentindex}" 
+					v-else @click="currentindex=index">设为默认</span>
+					<span @click="deleteitem(index)">删除</span>
+				</div>
+			</li>
+		</ul>
+		<span class="insertaddr" @click="insertitem=true">添加新地址</span>
+		<div class="payment" @click="payment">付款</div>
+	</div>
+	<div class="dialog dialog-plus" v-if="insertitem">
+		<div class="header">
+			<div>添加地址</div>
+			<div class="quit" @click="insertitem=false">X</div>
+		</div>
+		<div class="content">
+			<form class="fill">
+				<div>
+					<label>地址：</label>
+					<input type="text" name=address"" v-model="newaddr" placeholder="输入配送地址" autofocus="true" />
+				</div>
+				<div>
+					<label>电话：</label>
+					<input type="text" name="tel" v-model="newtel" placeholder="输入联系电话">
+				</div>
+			</form>
+		</div>
+		<div class="choice">
+			<div class="issure submit" @click="submit">提交</div>
+			<div class="issure submit" @click="insertitem=false">取消</div>
+		</div>
+	</div>
+	<div class="shadow" v-if="insertitem"></div>
+	<div class="dialog" v-if="delitem">
+		<div class="header">
+			<div>弹出框</div>
+			<div class="quit" @click="delitem=false">X</div>
+		</div>
+		<div class="content">你确定要删除吗？</div>
+		<div class="choice">
+			<div class="issure" @click="sureit">确定</div>
+			<div class="issure" @click="delitem=false">取消</div>
+		</div>
+	</div>
+	<div class="shadow" v-if="delitem"></div>
+</article>
+
+<!--购买成功-->
+<article class="buysuccess" v-if="currentPage === 7">
+	<div v-if="flag == 1">
+		<header>
+			<div class="title">购买成功</div>
+		</header>
+		<div class="success">
+			<div><img src="../images/success.jpg"></div>
+		</div>
+		<div class="lookorder" @click="allorder(1)">查看订单</div>
+	</div>
+	<div v-if="flag == 0">
+		<header>
+			<div class="title">添加成功</div>
+		</header>
+		<div class="success">
+			<div><img src="../images/success.jpg"></div>
+		</div>
+		<div class="lookorder" @click="allorder(0)">查看购物车</div>
+	</div>
+</article>
+
+<!--页脚-->
+<footer class="choice-box">
+		<div class="home-btn" @click="currentPage=1">首页</div>
+		<div class="talk-btn">问吧</div>
+		<div class="user-btn" @click="my">我的</div>
+</footer>
+</div>
+
+
+
+<script type="text/javascript" src="https://cdn.bootcss.com/vue/2.2.6/vue.min.js">
+</script>
+<script type="text/javascript" src="https://cdn.bootcss.com/vue-resource/1.3.1/vue-resource.min.js"></script>
+<script type="text/javascript" src="../js/home.js"></script>
+
+</body>
+</html>
