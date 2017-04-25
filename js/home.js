@@ -30,21 +30,21 @@ new Vue({
 		var _this = this;
 		//读取json文件，获得所有蛋糕信息
 		_this.$http.get("../json/cakelist.json").then(function (res){
-			console.log(res);
+			_this.cakelist = res.body.result.list;
 		}).catch(function (error){
-			_this.cakelist = error.body.result.list;
+			console.log(error);
 		});
 
 		//读取当前用户的所有订单信息
 		_this.$http.get("../json/orderlist.json").then(function (res){
 			_this.orderlist = res.body.result.list;
-		}).catch(function (error){
-			_this.orderlist = error.body.result.list;
 			_this.orderlist.forEach(function (item){
 				if (item.userId === '002'){
 					_this.curUserOrder.push(item);
 				}
 			});
+		}).catch(function (error){
+			console.log(error);
 		});
 	},
 	methods: {
@@ -77,11 +77,11 @@ new Vue({
 		filladdress: function (tag){
 			var _this = this;
 			_this.$http.get("../json/addresslist.json").then(function (res){
-				console.log(res);
-			}).catch(function (error){
-				_this.addresslist = error.body.result.list;
+				_this.addresslist = res.body.result.list;
 				_this.flag = tag;
 				_this.currentPage = 6;
+			}).catch(function (error){
+				console.log(error);
 			});
 		},
 
@@ -194,16 +194,15 @@ new Vue({
 		my: function(){
 			var _this = this;
 			_this.$http.get("../json/userlist.json").then(function (res){
-				console.log(res);
-			}).catch(function (error){
-				console.log(error);
-				_this.userlist = error.body.result.list;
+				_this.userlist = res.body.result.list;
 				_this.userlist.forEach(function (item){
 					if (item.userId == '002'){
 						_this.user = item;
 					}
 				});
 				_this.currentPage = 3;
+			}).catch(function (error){
+				console.log(error);
 			});
 		}
 	},
