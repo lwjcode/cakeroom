@@ -103,6 +103,11 @@
 	.address-item{
 		width: 100%;
 	}
+	
+	.dialog-plus{
+		height: 50%;
+		width:90%;
+	}
 
 	.fill div input{
 		height: 30px;
